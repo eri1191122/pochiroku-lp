@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ポチ録 ｜ 推しの配信を自動で録画</title>
+<meta name="description" content="TikTok LIVE・ツイキャス・Twitch・YouTube Live の配信を、始まった瞬間から自動で録画して MP4 に残す Windows のツール。無料の体験版は 10 日間、製品版とまったく同じ。">
+<meta property="og:title" content="ポチ録 ｜ その配信、終わったら二度と見られない。">
+<meta property="og:description" content="推しの配信が始まった瞬間に自動で録画、終わったら MP4。無料の体験版は 10 日間、製品版と同じ。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://eri1191122.github.io/pochiroku-lp/img/ad_late_night.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@500&display=swap">
+<style>
+/* 配置: 「消える配信」を一文で突きつける見出し → 動く一覧（録画が始まる瞬間）→ 実績の数字 → 3 つの場面（広告画像）→ 手で録るのとの違い → 使い方 → 本物の画面 → 料金（体験版は製品版と同じ）。CTA は「無料で 10 日、全部使う」。 */
+:root{
+  --bg:#f5f8f7; --surface:#ffffff; --fg:#142524; --muted:#4f6664; --line:#d5e0de;
+  --accent:#0e766e; --accent-hi:#0a5f58; --accent-fg:#ffffff;
+  --rec:#d23b3b; --rec-soft:#fde8e8; --queue:#fff3c7; --queue-fg:#7a5200; --ok:#1f8a4c;
+  --display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;
+  --body:"BIZ UDPGothic","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --mono:"Roboto Mono",ui-monospace,"Consolas",monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1716; --surface:#172221; --fg:#e6efee; --muted:#9fb5b2; --line:#2a3b39;
+  --accent:#3fbbb0; --accent-hi:#5fd0c5; --accent-fg:#06201e;
+  --rec:#ff6b6b; --rec-soft:#3a1f20; --queue:#3a3218; --queue-fg:#f2d27a; --ok:#5fcf8a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1716; --surface:#172221; --fg:#e6efee; --muted:#9fb5b2; --line:#2a3b39;
+  --accent:#3fbbb0; --accent-hi:#5fd0c5; --accent-fg:#06201e;
+  --rec:#ff6b6b; --rec-soft:#3a1f20; --queue:#3a3218; --queue-fg:#f2d27a; --ok:#5fcf8a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.85;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:0}
+section{padding-block:60px;border-top:1px solid var(--line)}
+h1,h2,h3{text-wrap:balance;line-height:1.3;margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(32px,5.8vw,58px)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,3.4vw,32px);margin-bottom:22px}
+h3{font-size:18px;font-weight:700}
+p{margin:0;max-width:65ch}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+header.top .brand{display:flex;align-items:center;gap:10px}
+header.top img{width:36px;height:36px}
+header.top b{font-family:var(--display);font-weight:400;font-size:20px}
+header.top a.mini{font-size:14px;font-weight:700;text-decoration:none;color:var(--accent-fg);background:var(--accent);padding:8px 14px;border-radius:8px;white-space:nowrap}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center;padding-block:34px 56px}
+.hero > *{min-width:0}
+.eyebrow{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--rec);margin-bottom:14px}
+.lead{font-size:18px;margin-top:18px}
+.cta{margin-top:28px}
+.btn{display:inline-block;text-decoration:none;font-weight:700;padding:16px 26px;border-radius:12px;border:2px solid var(--accent);font-size:18px}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.primary:hover{background:var(--accent-hi)}
+.btn:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+.sub{font-size:14px;margin-top:10px}
+.objections{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:14px;color:var(--muted)}
+.objections span::before{content:"✓ ";color:var(--ok);font-weight:700}
+/* 動く一覧（本物の画面の作りを再現。名前は架空） */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 40px rgba(10,40,38,.14);overflow:hidden;font-size:14px}
+.panel .bar{display:flex;gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px}
+.panel .bar i{width:10px;height:10px;border-radius:50%;background:var(--ok);display:inline-block}
+.row{display:grid;grid-template-columns:84px 1fr 72px 1fr;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);align-items:center;white-space:nowrap}
+.row > *{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.row .st{font-weight:700}
+.row.rec{background:var(--rec-soft);color:var(--rec)}
+.row.q{background:var(--queue);color:var(--queue-fg)}
+.row .t{font-family:var(--mono);font-size:12px}
+.row.live-in{animation:turnrec 9s ease-in-out infinite}
+@keyframes turnrec{0%,38%{background:transparent;color:inherit}44%,100%{background:var(--rec-soft);color:var(--rec)}}
+.row.live-in .st::before{content:"監視中";animation:label 9s ease-in-out infinite}
+@keyframes label{0%,38%{content:"監視中"}44%,100%{content:"● 録画中"}}
+.row.live-in .d::before{content:"02:09 配信なし";animation:detail 9s ease-in-out infinite}
+@keyframes detail{0%,38%{content:"02:09 配信なし"}44%,100%{content:"配信: 深夜の雑談（録画中）"}}
+@media (prefers-reduced-motion: reduce){.row.live-in{animation:none;background:var(--rec-soft);color:var(--rec)}.row.live-in .st::before{content:"● 録画中";animation:none}.row.live-in .d::before{content:"配信: 深夜の雑談（録画中）";animation:none}}
+.cap{font-size:13px;margin-top:10px}
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.proof > div{min-width:0;border-left:3px solid var(--accent);padding-left:14px}
+.proof b{display:block;font-family:var(--mono);font-size:28px;line-height:1.2}
+.proof span{font-size:14px;color:var(--muted)}
+.src{font-size:13px;margin-top:16px}
+.scene{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.scene > div{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.scene img{display:block;width:100%;height:auto;border-radius:8px;margin-bottom:12px;cursor:zoom-in}
+.scene h3{margin-bottom:8px}
+.tl{list-style:none;margin:12px 0 0;padding:0;font-size:14px}
+.tl li{display:grid;grid-template-columns:52px 1fr;gap:10px;padding-block:3px}
+.tl .t{font-family:var(--mono);color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{min-width:0;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:30px;color:var(--accent);display:block}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.x{color:var(--rec)} td.o{color:var(--ok);font-weight:700}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px}
+.shot img{display:block;width:100%;height:auto;border-radius:6px;cursor:zoom-in}
+.two{display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:start}
+.two > *{min-width:0}
+.big{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;margin:18px 0 0}
+.big img,.story img,.figs img{display:block;width:100%;height:auto;border-radius:6px;cursor:zoom-in}
+.big figcaption,.story figcaption,.figs figcaption{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.6}
+.legend-list{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
+.legend-list li{min-width:0;display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start}
+.legend-list b{display:inline-block;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-fg);text-align:center;line-height:30px;font-family:var(--mono)}
+.story{display:grid;gap:18px}
+.story figure,.figs figure{margin:0;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px}
+.figs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.figs figure.wide{grid-column:1 / -1}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:92vh;border-radius:6px;background:#fff}
+.feat{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 40px}
+.feat > div{min-width:0}
+.feat h3{margin-bottom:4px}
+.safe ul{margin:0;padding-left:1.2em}
+.safe li{margin-block:6px}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;min-width:0}
+.plan.trial{border:2px solid var(--rec)}
+.plan.pro{border:2px solid var(--accent)}
+.plan .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--rec);border:1px solid var(--rec);border-radius:6px;padding:1px 8px;margin-left:8px;vertical-align:middle}
+.plan .yen{font-family:var(--mono);font-size:32px;margin-block:6px 12px}
+.plan ul{margin:0 0 18px;padding-left:1.2em}
+.plan .btn{font-size:16px;padding:12px 20px}
+details{border-bottom:1px solid var(--line);padding-block:14px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px}
+.last{text-align:center;padding-block:56px}
+.last h2{margin-bottom:12px}
+footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+@media (max-width:820px){
+  .hero,.two{grid-template-columns:1fr}
+  .scene,.steps,.feat,.price,.figs,.legend-list{grid-template-columns:1fr}
+  .proof{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:76px 1fr 64px 1fr;font-size:13px}
+  h1{font-size:clamp(30px,9vw,40px)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><img alt="" src="img/icon.png"><b>ポチ録</b></div>
+    <a class="mini" href="https://booth.pm/ja/items/7590434">無料で 10 日試す</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="eyebrow">TikTok LIVE / ツイキャス / Twitch / YouTube Live ・ Windows</span>
+      <h1>その配信、終わったら二度と見られない。</h1>
+      <p class="lead">寝落ちした夜も、仕事中の昼も。ポチ録は、推しの配信が始まった瞬間に自動で録画を始め、終わったら MP4 にして残す Windows のツールです。URL を貼ったら、あとは待つだけ。</p>
+      <div class="cta">
+        <a class="btn primary" href="https://booth.pm/ja/items/7590434">無料で 10 日、全部使う（BOOTH）</a>
+        <p class="sub muted">体験版は製品版とまったく同じ。10 日たったら録画が止まるだけで、録った MP4 は残ります。製品版は買い切り ¥2,980、月額なし。<a href="#price">くわしく</a></p>
+      </div>
+      <div class="objections"><span>無料 10 日・製品版と同じ機能</span><span>インストール不要</span><span>あなたのアカウント不要</span><span>Windows 10 / 11</span></div>
+    </div>
+    <div>
+      <div class="panel" aria-label="ポチ録の一覧の動き（見本）">
+        <div class="bar"><i></i>監視中・確認: ツイキャス 30 秒、TikTok 90 秒・録画 2/5 本</div>
+        <div class="row rec"><span class="st">● 録画中</span><span>推しの A さん</span><span class="t">01:12</span><span>配信: 寝落ち雑談</span></div>
+        <div class="row live-in"><span class="st"></span><span>推しの B さん</span><span class="t">02:10</span><span class="d"></span></div>
+        <div class="row"><span class="st">監視中</span><span>推しの C さん</span><span class="t"></span><span>02:09 配信なし</span></div>
+        <div class="row q"><span class="st">順番待ち</span><span>推しの D さん</span><span class="t"></span><span>枠が空くと録画します（1 番目）</span></div>
+        <div class="row"><span class="st">監視中</span><span>推しの E さん</span><span class="t"></span><span>配信予定 毎日 21:00（次は今日）</span></div>
+      </div>
+      <p class="cap muted">配信が始まると、行が赤い「● 録画中」に変わります（名前は見本です）</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>一晩まかせた結果</h2>
+    <div class="proof">
+      <div><b>5 本</b><span>同時に録画（既定。最大 10 本）</span></div>
+      <div><b>0 件</b><span>一晩の失敗・エラー</span></div>
+      <div><b>6 時間超</b><span>24 時間配信を 1 本で録画</span></div>
+      <div><b>24 時間</b><span>見張りっぱなしでも軽い（CPU は確認 1 回 約 0.1 秒）</span></div>
+    </div>
+    <p class="src muted">2026 年 10 月 16〜17 日、開発者の PC での実機テスト（TikTok 2・ツイキャス 2・YouTube 1 を同時に録画、01:12〜07:00）。</p>
+  </section>
+
+  <section>
+    <h2>こんなとき、効きます</h2>
+    <div class="scene">
+      <div><img alt="寝落ちした。推しは配信してた。" src="img/ad_late_night.jpg"><h3>寝落ちした夜</h3><p class="muted">寝ている間に始まって、朝には消えている配信。</p>
+        <ul class="tl"><li><span class="t">23:30</span><span>URL を貼って寝る</span></li><li><span class="t">02:10</span><span>配信が始まる → 自動で録画開始</span></li><li><span class="t">04:40</span><span>配信が終わる → MP4 に変換</span></li><li><span class="t">07:00</span><span>起きたら、録画フォルダに残っている</span></li></ul></div>
+      <div><img alt="配信開始。こっちは、まだ仕事。" src="img/ad_workday.jpg"><h3>仕事中・授業中</h3><p class="muted">「配信開始」の通知が来ても、動けないとき。</p>
+        <ul class="tl"><li><span class="t">12:00</span><span>通知が来る。でも手が離せない</span></li><li><span class="t">12:01</span><span>ポチ録はもう録画中</span></li><li><span class="t">19:00</span><span>帰ってから、最初から見る</span></li></ul></div>
+      <div><img alt="開始時刻を、入力しなくていい。" src="img/ad_flow.jpg"><h3>いつ始まるか分からない</h3><p class="muted">予告なしのゲリラ配信でも、URL を貼っておけば 30〜90 秒で気づきます。</p>
+        <ul class="tl"><li><span class="t">いつでも</span><span>何度もアプリを開いて確かめなくていい</span></li><li><span class="t">同時に</span><span>3 人が同時に配信しても、5 本まで同時に録る。足りなければ順番待ち</span></li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>手で録るのと、何が違うか</h2>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>手で録る</th><th>ポチ録</th></tr></thead>
+      <tbody>
+        <tr><td>配信の始まりに気づく</td><td class="x">通知を見てから。寝ていたら気づけない</td><td class="o">自動。始まってから最長 30〜90 秒で録画開始</td></tr>
+        <tr><td>録画の操作</td><td class="x">毎回、録画ソフトを立ち上げて止める</td><td class="o">なし。終わったら MP4 まで自動</td></tr>
+        <tr><td>何人も同時に</td><td class="x">1 人ずつ。手が足りない</td><td class="o">5 本まで同時（最大 10 本）。足りなければ順番待ち</td></tr>
+        <tr><td>ファイルの名前</td><td class="x">自分で付け直す</td><td class="o">「日時・配信者名・タイトル」で自動</td></tr>
+        <tr><td>PC が落ちたとき</td><td class="x">途中の録画は壊れる</td><td class="o">次の起動で、残った録画を MP4 に直す</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>URL を貼ったら、あとは待つだけ</h2>
+    <ol class="steps">
+      <li><h3>配信者のページの URL を貼る</h3><p class="muted">TikTok・ツイキャス・Twitch・YouTube のページの URL をコピーして、入力欄に貼り付けます。</p></li>
+      <li><h3>「＋ 追加」を押す</h3><p class="muted">それだけで見張りが始まります。30 人まで並べておけます。</p></li>
+      <li><h3>配信が始まったら自動で録画</h3><p class="muted">終わると MP4 になり、「日時・配信者名・タイトル」の名前で保存されます。</p></li>
+    </ol>
+  </section>
+
+  <section id="screen">
+    <h2>画面で見る、起きること</h2>
+    <p class="muted">本物の画面です（配信者の名前は見本に変えています）。番号の場所を見てください。</p>
+    <figure class="big"><img alt="ポチ録の一覧の画面に番号をつけた図" src="img/main_annotated.png"><figcaption>クリックで大きく表示</figcaption></figure>
+    <ol class="legend-list">
+      <li><b>1</b> ここに配信者のページの URL を貼って「＋ 追加」。それだけで見張りが始まります。</li>
+      <li><b>2</b> 配信が始まると、行が赤い「● 録画中」に変わります。開始時刻・経過・いまのファイルの大きさが出ます。</li>
+      <li><b>3</b> 同時録画の枠（既定 5 本）がいっぱいなら、黄色の「順番待ち」。空いたら自動で録画が始まります。</li>
+      <li><b>4</b> 配信していない人は「08:17 配信なし」。最後にいつ確かめたかが分かります。</li>
+      <li><b>5</b> いちばん上の行に、いま何本録画中か、各サイトを何秒ごとに確かめているかが出ます。</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>配信が始まった瞬間に、こうなります</h2>
+    <div class="story">
+      <figure><img alt="監視中の行。02:09 配信なし" src="img/row_watch.png"><figcaption>1. 待っているあいだは「監視中」。30 秒ごとに確かめています</figcaption></figure>
+      <figure><img alt="録画中の行。赤く表示され、経過と容量が増える" src="img/row_rec.png"><figcaption>2. 配信が始まると赤い「● 録画中」に。あなたは何もしなくていい</figcaption></figure>
+      <figure><img alt="録画フォルダ。日時・配信者名・タイトルの名前の MP4" src="img/folder.png"><figcaption>3. 終わると MP4 になり、「日時・配信者名・タイトル」の名前で録画フォルダに並びます</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>操作は、これだけ</h2>
+    <div class="figs">
+      <figure class="wide"><img alt="URL を貼った入力欄と「＋ 追加」ボタン" src="img/add.png"><figcaption>URL を貼って「＋ 追加」。間違った URL は、ここで教えてくれます</figcaption></figure>
+      <figure><img alt="行の右クリックの一覧" src="img/menu.png"><figcaption>行を右クリック。「この録画を止める」で 1 本だけ止められます。予約・合言葉・名前の変更もここ</figcaption></figure>
+      <figure><img alt="予約の画面" src="img/reservation.png"><figcaption>予約は日付と時刻を選ぶだけ。「毎日」「毎週（曜日）」もあります</figcaption></figure>
+      <figure><img alt="ヘルプの文" src="img/help.png"><figcaption>困ったときの答えはアプリの中に。Windows の警告の対処もここ</figcaption></figure>
+      <figure><img alt="設定の画面" src="img/settings.png"><figcaption>設定は「何か・変えるとどうなるか・おすすめ」の順で書いてあります。迷ったら「おすすめ」のまま</figcaption></figure>
+      <figure><img alt="閉じるときの確認" src="img/close.png"><figcaption>閉じるときは必ず確認。録画中の分は MP4 に仕上げてから閉じます</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>できること</h2>
+    <div class="feat">
+      <div><h3>予約録画</h3><p class="muted">日付と時刻を選ぶだけ。「毎日 21:00」「毎週 月・水・金 22:00」の繰り返しも入れられます。予定の前後 10 分は短い間隔で確認します。</p></div>
+      <div><h3>1 本だけ止める</h3><p class="muted">右クリック →「この録画を止める」。その配信が続く間は録り直しません。間違えたら「この配信を録り直す」。</p></div>
+      <div><h3>止まっても録画が残る</h3><p class="muted">PC が落ちた・強制終了したあとでも、次に起動したときに残った録画を MP4 に直します。</p></div>
+      <div><h3>空き容量を見張る</h3><p class="muted">空きが 5 GB を切ると新しい録画を始めず、2 GB を切ると止めます。PC がいっぱいになって固まるのを防ぎます。</p></div>
+      <div><h3>合言葉の配信</h3><p class="muted">ツイキャスの合言葉の配信は、右クリックで合言葉を入れておけば録れます。</p></div>
+      <div><h3>分かりやすいヘルプ</h3><p class="muted">「録れないときは」「PC のスリープ」「Windows の警告」など、困ったときの答えをアプリの中に用意しています。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="two">
+      <div>
+        <h2>予約は、日付と時刻を選ぶだけ</h2>
+        <p class="muted">配信の予定が分かっているときに入れておくと、始まりにすぐ気づけます。入れなくても、ふだんの見張りで録画はできます。終わった「この日だけ」の予約は自動で消えます。</p>
+      </div>
+      <figure class="shot" style="margin:0"><img alt="予約の画面。この日だけ・毎日・毎週を選び、日付と時刻を選んで追加する" src="img/reservation.png"></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>対応サイト</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>サイト</th><th>確認の間隔</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr><td>TikTok LIVE</td><td class="num">90 秒ごと</td><td class="o">対応。あなたのアカウントは使いません</td></tr>
+        <tr><td>ツイキャス</td><td class="num">30 秒ごと</td><td class="o">対応。合言葉の配信も録れます</td></tr>
+        <tr><td>Twitch</td><td class="num">60 秒ごと</td><td class="o">対応。広告のあいだ、録画が数十秒途切れることがあります</td></tr>
+        <tr><td>YouTube Live</td><td class="num">4 分ごと</td><td class="o">対応。アーカイブが残るサイトなので、確認はゆるめです</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="safe">
+    <h2>あなたのアカウントを守る作り</h2>
+    <ul>
+      <li>TikTok・Twitch・YouTube では、あなたのアカウントもログイン情報も使いません。アカウント停止の心配がありません。</li>
+      <li>ツイキャスも、ふだんはログインしません。年齢制限・グループ限定の配信を録りたい人だけ、設定で有効にできます（普段使っていないアカウントをおすすめします）。</li>
+      <li>サイトへの確認の回数には上限があり、ポチ録が自動で控えめにします。混み合っているという知らせを受けたら、そのサイトだけ自動で休みます。</li>
+    </ul>
+  </section>
+
+  <section id="price">
+    <h2>体験版は、製品版とまったく同じ</h2>
+    <div class="price">
+      <div class="plan trial">
+        <h3>体験版<span class="tag">10 日間・全機能</span></h3><div class="yen">¥0</div>
+        <ul><li>配信者 30 人・同時に録画 最大 10 本・予約・1 本だけ止める。全部そのまま</li><li>10 日たったら、録画が止まります</li><li>録った MP4 は残ります。再生もできます</li><li>製品版のキーを入れると、登録した配信者もそのまま続きから</li></ul>
+        <a class="btn primary" href="https://booth.pm/ja/items/7590434">無料で 10 日、全部使う</a>
+      </div>
+      <div class="plan pro">
+        <h3>製品版（買い切り）</h3><div class="yen">¥2,980</div>
+        <ul><li>期限なし。月額なし</li><li>登録できる配信者 30 人</li><li>同時に録画 最大 10 本（既定 5 本）</li><li>v1 をお持ちの方は無料で更新</li></ul>
+        <a class="btn" href="https://booth.pm/ja/items/7590460">製品版を買う（BOOTH）</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>よくある質問</h2>
+    <details><summary>10 日たったらどうなりますか</summary><p class="muted">新しい録画と見張りが止まります。録った MP4 はそのまま残り、再生もできます。製品版のキーを入れると、登録した配信者も設定もそのまま、続きから使えます。</p></details>
+    <details><summary>録画しても大丈夫ですか</summary><p class="muted">自分で見るための私的な録画の範囲でお使いください。録画の再配布・販売・公開はできません。配信者が録画を禁じている場合はそれに従ってください。</p></details>
+    <details><summary>アカウントが停止されたりしませんか</summary><p class="muted">TikTok・Twitch・YouTube ではあなたのアカウントを一切使いません。ツイキャスも、ふだんはログインしません。限定配信を録りたい人だけ、設定でログインを有効にできます。</p></details>
+    <details><summary>起動したら「Windows によって PC が保護されました」と出た</summary><p class="muted">署名のない個人製作のアプリなので出ます。「詳細情報」→「実行」で起動できます。アプリの中のヘルプにも手順があります。</p></details>
+    <details><summary>録れない配信はありますか</summary><p class="muted">有料（チケット・サブスク・メンバーシップ限定）の配信と、入会していない限定配信は録れません。YouTube のメンバーシップ限定も録れません。</p></details>
+    <details><summary>PC がスリープすると録れますか</summary><p class="muted">スリープ中は録れません。ポチ録の設定から、ノート PC のふたを閉じても動き続けるようにできます。</p></details>
+    <details><summary>画質と容量は</summary><p class="muted">配信そのものの画質で録ります。1 時間でおよそ 1〜2 GB です。</p></details>
+  </section>
+
+  <div class="last">
+    <h2>今夜の配信から、残せます。</h2>
+    <p class="muted" style="margin:0 auto 18px">無料の体験版は 10 日間、製品版と同じ。インストール不要で、ZIP を展開して起動するだけです。</p>
+    <a class="btn primary" href="https://booth.pm/ja/items/7590434">無料で 10 日、全部使う（BOOTH）</a>
+  </div>
+
+  <footer>
+    <p>各サイトの仕様が変わると、一時的に録れなくなることがあります。できるだけ早く更新で対応します。お問い合わせは BOOTH のショップ（pochiroku.booth.pm）のメッセージからどうぞ。</p>
+  </footer>
+</div>
+
+<div id="lb" aria-hidden="true"><img alt=""></div>
+<script>
+(function(){var lb=document.getElementById("lb"),im=lb.querySelector("img");
+document.querySelectorAll(".big img,.story img,.figs img,.shot img,.scene img").forEach(function(x){x.addEventListener("click",function(){im.src=x.src;lb.classList.add("on");});});
+lb.addEventListener("click",function(){lb.classList.remove("on");im.src="";});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){lb.classList.remove("on");}});})();
+</script>
+</body>
+</html>
