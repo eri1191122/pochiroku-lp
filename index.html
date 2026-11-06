@@ -151,13 +151,25 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
   .row{grid-template-columns:76px 1fr 64px 1fr;font-size:13px}
   h1{font-size:clamp(30px,9vw,40px)}
 }
+.only-m{display:none}
+.is-mobile .only-m{display:block}
+.mnote{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
 </style>
+<script>
+// スマホ・タブレットでは、体験版のボタンを「PC 用のリンクを送る」に変える（ZIP は PC 用・約 145 MB）
+(function(){
+  var ua = navigator.userAgent || "";
+  var m = /iPhone|iPad|iPod|Android|Mobile/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  window.POCHI_MOBILE = m;
+  if (m) document.documentElement.className += " is-mobile";
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div class="brand"><img alt="" src="img/icon.png"><b>ポチ録</b></div>
-    <a class="mini" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-goatcounter-click="click-dl-header" data-goatcounter-title="無料で 10 日試す（ヘッダー）">無料で 10 日試す</a>
+    <a class="mini" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="PC に送る" data-goatcounter-click="click-dl-header" data-goatcounter-title="無料で 10 日試す（ヘッダー）">無料で 10 日試す</a>
   </header>
 
   <div class="hero">
@@ -166,9 +178,10 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
       <h1>その配信、終わったら<br>二度と見られない。</h1>
       <p class="lead">寝落ちした夜も、仕事中の昼も。ポチ録は、推しの配信が始まった瞬間に自動で録画を始め、終わったら MP4 にして残す Windows のツールです。URL を貼ったら、あとは待つだけ。</p>
       <div class="cta">
-        <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-goatcounter-click="click-dl-hero" data-goatcounter-title="無料で 10 日試す（上のボタン）">無料で 10 日試す（登録不要・ZIP を直接ダウンロード）</a>
+        <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="無料で 10 日試す（PC 用のリンクを送る）" data-goatcounter-click="click-dl-hero" data-goatcounter-title="無料で 10 日試す（上のボタン）">無料で 10 日試す（登録不要・ZIP を直接ダウンロード）</a>
         <p class="sub muted">体験版は製品版とまったく同じ。10 日たったら録画が止まるだけで、録った MP4 は残ります。製品版は買い切り ¥2,980、月額なし。<a href="#flow">試してから決められます</a></p>
         <p class="sub muted">BOOTH からも入手できます：<a href="https://booth.pm/ja/items/7590434" data-goatcounter-click="click-booth-trial-hero" data-goatcounter-title="BOOTH 体験版（上）">体験版（BOOTH）</a></p>
+        <p class="sub mnote only-m">スマホで見ている方へ：ポチ録は Windows の PC で使います。上のボタンで、PC で開くリンクを自分に送れます。<a href="https://eri1191122.github.io/pochiroku-lp/buy/" data-goatcounter-click="click-buy-mobile-hero" data-goatcounter-title="製品版キーを買う（スマホ・上）">製品版キー（¥2,980）はスマホからでも買えます</a>。キーは PC に結びつかないので、あとで PC のポチ録に貼るだけです。</p>
       </div>
       <div class="objections"><span>無料 10 日・製品版と同じ機能</span><span>インストール不要</span><span>あなたのアカウント不要</span><span>Windows 10 / 11</span></div>
     </div>
@@ -325,7 +338,7 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
       <div class="plan trial">
         <h3>体験版<span class="tag">10 日間・全機能</span></h3><div class="yen">¥0</div>
         <ul><li>配信者 30 人・同時に録画 最大 10 本・予約・1 本だけ止める。全部そのまま</li><li>10 日たったら、録画が止まります</li><li>録った MP4 は残ります。再生もできます</li><li>製品版のキーを入れると、登録した配信者もそのまま続きから</li></ul>
-        <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-goatcounter-click="click-dl-pricing" data-goatcounter-title="無料で 10 日試す（料金）">無料で 10 日試す</a>
+        <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="無料で 10 日試す（PC 用のリンクを送る）" data-goatcounter-click="click-dl-pricing" data-goatcounter-title="無料で 10 日試す（料金）">無料で 10 日試す</a>
         <p class="sub muted">BOOTH からも入手できます：<a href="https://booth.pm/ja/items/7590434" data-goatcounter-click="click-booth-trial-pricing" data-goatcounter-title="BOOTH 体験版（料金）">体験版（BOOTH）</a></p>
       </div>
       <div class="plan pro">
@@ -353,7 +366,7 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
   <div class="last">
     <h2>今夜の配信から、残せます。</h2>
     <p class="muted" style="margin:0 auto 18px">無料の体験版は 10 日間、製品版と同じ。インストール不要で、ZIP を展開して起動するだけです。</p>
-    <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-goatcounter-click="click-dl-last" data-goatcounter-title="無料で 10 日試す（最後）">無料で 10 日試す（登録不要）</a>
+    <a class="btn primary" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="無料で 10 日試す（PC 用のリンクを送る）" data-goatcounter-click="click-dl-last" data-goatcounter-title="無料で 10 日試す（最後）">無料で 10 日試す（登録不要）</a>
     <p class="sub muted" style="margin:18px auto 10px">もう決めている方は</p>
     <a class="btn buy" href="https://eri1191122.github.io/pochiroku-lp/buy/" data-goatcounter-click="click-buy-last" data-goatcounter-title="製品版キーを買う（最後）">製品版キーを買う ¥2,980</a>
   </div>
@@ -369,6 +382,16 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
 document.querySelectorAll(".big img,.story img,.figs img,.shot img,.scene img").forEach(function(x){x.addEventListener("click",function(){im.src=x.src;lb.classList.add("on");});});
 lb.addEventListener("click",function(){lb.classList.remove("on");im.src="";});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){lb.classList.remove("on");}});})();
+</script>
+<script>
+(function(){
+  if (!window.POCHI_MOBILE) return;
+  var a = document.querySelectorAll("a[data-m]");
+  for (var i = 0; i < a.length; i++) {
+    a[i].textContent = a[i].getAttribute("data-m");
+    a[i].setAttribute("data-goatcounter-click", a[i].getAttribute("data-goatcounter-click") + "-m");
+  }
+})();
 </script>
 <script data-goatcounter="https://pochiroku.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
