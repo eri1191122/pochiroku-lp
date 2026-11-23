@@ -97,6 +97,7 @@ table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.04em}
 td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.num small{display:block;white-space:normal;font-family:var(--body);font-size:12px;line-height:1.5;width:9em;margin-top:2px}
 td.x{color:var(--rec)} td.o{color:var(--ok);font-weight:700}
 .shot{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px}
 .shot img{display:block;width:100%;height:auto;border-radius:6px;cursor:zoom-in}
@@ -225,7 +226,7 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
         <ul class="tl"><li><span class="t">23:30</span><span>URL を貼って寝る</span></li><li><span class="t">02:10</span><span>配信が始まる → 自動で録画開始</span></li><li><span class="t">04:40</span><span>配信が終わる → MP4 に変換</span></li><li><span class="t">07:00</span><span>起きたら、録画フォルダに残っている</span></li></ul></div>
       <div><h3>仕事中・授業中</h3><p class="muted">「配信開始」の通知が来ても、動けないとき。</p>
         <ul class="tl"><li><span class="t">12:00</span><span>通知が来る。でも手が離せない</span></li><li><span class="t">12:01</span><span>ポチ録はもう録画中</span></li><li><span class="t">19:00</span><span>帰ってから、最初から見る</span></li></ul></div>
-      <div><h3>いつ始まるか分からない</h3><p class="muted">予告なしのゲリラ配信でも、URL を貼っておけば 30〜90 秒で気づきます。</p>
+      <div><h3>いつ始まるか分からない</h3><p class="muted">予告なしのゲリラ配信でも、URL を貼っておけば PC が定期的に確かめて気づきます（ツイキャスは 30 秒ごと、TikTok LIVE は登録 3 人までなら 90 秒ごと）。</p>
         <ul class="tl"><li><span class="t">いつでも</span><span>何度もアプリを開いて確かめなくていい</span></li><li><span class="t">同時に</span><span>3 人が同時に配信しても、5 本まで同時に録る。足りなければ順番待ち</span></li></ul></div>
     </div>
   </section>
@@ -235,7 +236,7 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
     <div class="tbl"><table>
       <thead><tr><th></th><th>手で録る</th><th>ポチ録</th></tr></thead>
       <tbody>
-        <tr><td>配信の始まりに気づく</td><td class="x">通知を見てから。寝ていたら気づけない</td><td class="o">自動。始まってから最長 30〜90 秒で録画開始</td></tr>
+        <tr><td>配信の始まりに気づく</td><td class="x">通知を見てから。寝ていたら気づけない</td><td class="o">自動。配信を見つけた時点から録画します（確認の間隔は、サイトと登録の人数で変わります。下の表）</td></tr>
         <tr><td>録画の操作</td><td class="x">毎回、録画ソフトを立ち上げて止める</td><td class="o">なし。終わったら MP4 まで自動</td></tr>
         <tr><td>何人も同時に</td><td class="x">1 人ずつ。手が足りない</td><td class="o">5 本まで同時（最大 10 本）。足りなければ順番待ち</td></tr>
         <tr><td>ファイルの名前</td><td class="x">自分で付け直す</td><td class="o">「日時・配信者名・タイトル」で自動</td></tr>
@@ -294,7 +295,7 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
     <div class="two">
       <div>
         <h2>予約は、日付と時刻を選ぶだけ</h2>
-        <p class="muted">配信の予定が分かっているときに入れておくと、始まりにすぐ気づけます。入れなくても、ふだんの見張りで録画はできます。終わった「この日だけ」の予約は自動で消えます。</p>
+        <p class="muted">配信の予定が分かっているときに入れておくと、予定の前後は確認の間隔が短くなります（短くなる幅はサイトで違います）。入れなくても、ふだんの見張りで録画はできます。終わった「この日だけ」の予約は自動で消えます。</p>
       </div>
       <figure class="shot" style="margin:0"><img alt="予約の画面。この日だけ・毎日・毎週を選び、日付と時刻を選んで追加する" src="img/reservation.png"></figure>
     </div>
@@ -305,8 +306,8 @@ footer{padding-block:36px;font-size:13px;color:var(--muted);border-top:1px solid
     <div class="tbl"><table>
       <thead><tr><th>サイト</th><th>確認の間隔</th><th>状態</th></tr></thead>
       <tbody>
-        <tr><td>TikTok LIVE</td><td class="num">90 秒ごと</td><td class="o">対応。あなたのアカウントは使いません<br><a href="https://eri1191122.github.io/pochiroku-lp/tiktok/" data-goatcounter-click="click-tiktok-guide" data-goatcounter-title="TikTok LIVE の録り方を詳しく（対応サイト）">TikTok LIVE の録り方を詳しく</a></td></tr>
-        <tr><td>ツイキャス</td><td class="num">30 秒ごと</td><td class="o">対応。合言葉の配信も録れます<br><a href="https://eri1191122.github.io/pochiroku-lp/twitcasting/" data-goatcounter-click="click-twitcasting-guide" data-goatcounter-title="ツイキャスの録り方を詳しく（対応サイト）">ツイキャスの録り方を詳しく</a></td></tr>
+        <tr><td>TikTok LIVE</td><td class="num">90 秒ごと〜<br><small class="muted">登録 3 人まで。10 人で約 4 分</small></td><td class="o">対応。あなたのアカウントは使いません<br><a href="https://eri1191122.github.io/pochiroku-lp/tiktok/" data-goatcounter-click="click-tiktok-guide" data-goatcounter-title="TikTok LIVE の録り方を詳しく（対応サイト）">TikTok LIVE の録り方を詳しく</a></td></tr>
+        <tr><td>ツイキャス</td><td class="num">30 秒ごと〜<br><small class="muted">初期設定。20 人を超えると長めに</small></td><td class="o">対応。合言葉の配信も録れます<br><a href="https://eri1191122.github.io/pochiroku-lp/twitcasting/" data-goatcounter-click="click-twitcasting-guide" data-goatcounter-title="ツイキャスの録り方を詳しく（対応サイト）">ツイキャスの録り方を詳しく</a></td></tr>
         <tr><td>Twitch</td><td class="num">60 秒以上</td><td class="o">対応（同時に 3 本まで）。広告のあいだ、録画が数十秒途切れることがあります<br><a href="https://eri1191122.github.io/pochiroku-lp/twitch/" data-goatcounter-click="click-twitch-guide" data-goatcounter-title="Twitch の録り方を詳しく（対応サイト）">Twitch の録り方を詳しく</a></td></tr>
         <tr><td>YouTube Live</td><td class="num">4 分以上</td><td class="o">対応（同時に 2 本まで）。アーカイブが残るサイトなので確認はゆるめ。登録が多いと間隔が延びます<br><a href="https://eri1191122.github.io/pochiroku-lp/youtube/" data-goatcounter-click="click-youtube-guide" data-goatcounter-title="YouTube Live の録り方を詳しく（対応サイト）">YouTube Live の録り方を詳しく</a></td></tr>
       </tbody>
