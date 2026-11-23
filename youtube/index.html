@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YouTube Live を PC で自動録画する方法｜ポチ録</title>
+<meta name="description" content="YouTube Live のチャンネルの URL を貼っておくと、ライブを見つけたら PC が自動で録画し、終わったら MP4 に。見逃し対策に。無料の体験版は 10 日間・全機能、製品版は ¥2,980 買い切り。">
+<link rel="canonical" href="https://eri1191122.github.io/pochiroku-lp/youtube/">
+<meta property="og:title" content="YouTube Live を PC で自動録画する方法｜ポチ録">
+<meta property="og:description" content="YouTube Live のチャンネルの URL を貼っておくと、ライブを見つけたら PC が自動で録画し、終わったら MP4 に。見逃し対策に。無料の体験版は 10 日間・全機能、製品版は ¥2,980 買い切り。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eri1191122.github.io/pochiroku-lp/youtube/">
+<meta property="og:image" content="https://eri1191122.github.io/pochiroku-lp/img/og_4sites.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://eri1191122.github.io/pochiroku-lp/img/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=BIZ+UDPGothic:wght@400;700&display=swap">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "YouTube Live を、寝てる間に PC で自動録画する", "inLanguage": "ja", "dateModified": "2026-11-23", "mainEntityOfPage": "https://eri1191122.github.io/pochiroku-lp/youtube/"}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "スマホだけで使えますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "使えません。ポチ録は Windows 10 / 11（64 ビット）の PC で動くアプリです。スマホからは、PC で開くリンクを自分に送れます。製品版キーはスマホからでも買えます。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "PC を閉じたり、スリープにしたりしても録れますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "録れません。PC とポチ録が動いている間だけ、監視と録画ができます。最小化したままなら使えます。自動スリープを防ぐ設定はありますが、手動のスリープやノート PC のふたを閉じた場合までは防げません。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "どんな URL を登録しますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "チャンネルの URL（https://www.youtube.com/@ハンドル の形）が基本です。動画やライブの URL を貼ったときは、チャンネルを探して登録します。終了済みの動画をダウンロードする用途ではありません。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "確認の間隔はどのくらいですか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "通常は 4 分（240 秒）以上です。登録人数が増えると延びます（例：5 人登録すると、基本の間隔は 350 秒）。確認には間隔があるため、配信を見つける前の部分にさかのぼって保存することはできません。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "メンバー限定の配信は録れますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "録れません。YouTube では、あなたのアカウントもログイン情報も使わないため、メンバー限定などの配信は非対応です。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "何人まで登録できますか。同時に何本録れますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "YouTube Live は 10 人まで登録でき、YouTube Live の同時録画は 2 本までです。4 サイト合計では、登録は 30 人まで、同時録画は初期設定 5 本（設定で 1〜10 本）です。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "長時間のライブも録れますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "開発者の実測では、6 時間 2 分のライブを 1.53 GB の MP4 で保存できました（2026 年 10 月 17 日）。YouTube の配信 URL は、約 6 時間で切れたとみられる実測があり、切れたときは 1 回すぐに確認し直して、録画の再開を試みます。すべての配信が 6 時間ちょうどで切れるという意味ではありません。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "画質は選べますか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "選べます。「標準 HD」「最高画質」「省容量（SD）」「音声のみ」から選びます（初期設定は標準 HD）。ただし YouTube のライブは音声専用の形式がないため、「音声のみ」でも、最も小さい映像つきの形式になる場合があります。"
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "体験版と製品版の違いは何ですか",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "機能は同じです。体験版は初回起動から 10 日間、無料で全機能が使えます。製品版は ¥2,980 の買い切りで、月額はなく、期限もありません。体験版の期限が来ても、録った MP4 は残ります。"
+   }
+  }
+ ]
+}
+</script>
+<script>
+// スマホ・タブレットでは、体験版のボタンを「PC 用のリンクを送る」に変える（index・dl と同じ）
+(function(){
+  var ua = navigator.userAgent || "";
+  var m = /iPhone|iPad|iPod|Android|Mobile/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  window.POCHI_MOBILE = m;
+  if (m) document.documentElement.className += " is-mobile";
+})();
+</script>
+<style>
+:root{--bg:#f5f8f7;--surface:#fff;--fg:#142524;--muted:#4f6664;--line:#d5e0de;--accent:#0e766e;--accent-hi:#0a5f58;--accent-fg:#fff;--rec:#d23b3b;--ok:#1f8a4c;--display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;--body:"BIZ UDPGothic","Hiragino Sans","Yu Gothic","Meiryo",sans-serif}
+@media (prefers-color-scheme: dark){:root{--bg:#0e1716;--surface:#172221;--fg:#e6efee;--muted:#9fb5b2;--line:#2a3b39;--accent:#3fbbb0;--accent-hi:#5fd0c5;--accent-fg:#06201e;--rec:#ff6b6b;--ok:#5fcf8a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.85;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:20px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+header.top a.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+header.top img{width:36px;height:36px}
+header.top b{font-family:var(--display);font-weight:400;font-size:20px}
+header.top a.mini{font-size:14px;font-weight:700;text-decoration:none;color:var(--accent-fg);background:var(--accent);padding:8px 14px;border-radius:8px;white-space:nowrap}
+h1,h2,h3{text-wrap:balance;line-height:1.35;margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(27px,6.2vw,40px);margin:14px 0 18px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(21px,4.6vw,28px);margin-bottom:18px}
+h3{font-size:17px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+section{padding-block:48px;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:13px;letter-spacing:.06em;color:var(--rec);font-weight:700}
+.lead{font-size:18px}
+.btn{display:inline-block;max-width:100%;text-decoration:none;font-weight:700;padding:15px 24px;border-radius:12px;border:2px solid var(--accent);font-size:17px;line-height:1.5;background:var(--accent);color:var(--accent-fg)}
+.btn:hover{background:var(--accent-hi);border-color:var(--accent-hi)}
+.btn:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+.btn.buy{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn.alt{background:transparent;color:var(--accent)}
+.sub{font-size:14px}
+.cta{margin-top:22px}
+.scenes{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:10px}
+.scenes li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.steps > li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.steps h3{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.steps h3 i{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-style:normal;display:grid;place-items:center}
+.shot{margin:10px 0 0}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;cursor:zoom-in}
+.shot figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
+.shot .sc{display:block}
+.shot picture{display:block}
+.shot .hint{display:none;font-size:12px;color:var(--muted);margin:4px 0 0;text-align:right}
+@media (max-width:640px){
+  .shot .sc{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px}
+  .shot .sc img{border:0;border-radius:0;width:calc(var(--mw) * .6px);max-width:none;height:auto}
+  .shot .hint{display:block}
+  .pc-only{display:none}
+}
+.verified{background:var(--surface);border:2px solid var(--ok);border-radius:12px;padding:14px 16px 14px 48px;position:relative;font-weight:700;max-width:none}
+.verified::before{content:"\2713";position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:16px;line-height:1}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.facts > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0;text-align:center}
+.facts b{display:block;font-size:22px;line-height:1.3}
+.facts span{font-size:13px;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted)}
+ul.rules{margin:0;padding-left:1.2em}
+ul.rules li{margin-block:8px}
+details{border-bottom:1px solid var(--line);padding-block:14px}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:8px}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.plan h3{margin-bottom:6px}
+.plan .yen{font-size:26px;font-weight:700;margin:4px 0 8px}
+.last{text-align:center;padding-block:48px}
+.last p{margin-inline:auto}
+footer{padding-block:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.only-m{display:none}
+.is-mobile .only-m{display:block}
+.mnote{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:92vh;border-radius:6px;background:#fff}
+@media (max-width:640px){
+  .facts,.price{grid-template-columns:1fr}
+  .btn{padding:14px 18px;font-size:16px}
+  th,td{padding:8px 8px}
+}
+.vid{max-width:480px;margin:20px auto 8px}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:12px;background:#000}
+.vid figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6;text-align:center}
+.vid img{display:block;width:100%;height:auto}
+.others{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://eri1191122.github.io/pochiroku-lp/"><img alt="" src="https://eri1191122.github.io/pochiroku-lp/img/icon.png"><b>ポチ録</b></a>
+    <a class="mini" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="PC に送る" data-goatcounter-click="click-dl-youtube-header" data-goatcounter-title="無料で 10 日試す（YouTube Live ページ・ヘッダー）">無料で 10 日試す</a>
+  </header>
+
+  <main>
+  <div style="padding-block:20px 44px">
+    <span class="eyebrow">YouTube Live ・ Windows</span>
+    <h1>YouTube Live を、寝てる間に PC で自動録画する</h1>
+    
+    <p class="lead">こんな場面で、推しの配信を見逃したことはありませんか。</p>
+    <ul class="scenes"><li>深夜に突然始まったライブ。気づいたときには終わっていた</li><li>仕事中にライブが始まったけれど、見られなかった</li><li>残らない配信や、後で見られなくなる配信を、手元に残しておきたい</li></ul>
+    <p class="lead"><b>チャンネルの URL を貼っておけば、ライブが始まったら PC が自動で録画し、終わったら MP4 にします。</b></p>
+    <figure class="shot"><div class="sc"><picture><source media="(max-width:640px)" srcset="https://eri1191122.github.io/pochiroku-lp/img/tiktok_m_four.png" width="734" height="300"><img src="https://eri1191122.github.io/pochiroku-lp/img/tiktok_pc_four.png" width="1039" height="667" style="--mw:734" alt="ポチ録の実際の画面。TikTok・ツイキャス・Twitch・YouTube の 4 配信を同時に録画中"></picture></div><p class="hint">横にスクロールできます</p><figcaption>実際の画面（4 サイトを同時に録画中）。※配信者名と、時間・容量の数字は見本です。</figcaption></figure>
+    <div class="cta">
+      <a class="btn" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="無料で 10 日試す（PC 用のリンクを送る）" data-goatcounter-click="click-dl-youtube" data-goatcounter-title="無料で 10 日試す（YouTube Live ページ・上）">無料で 10 日試す（登録不要・全機能）</a>
+      <p class="sub muted" style="margin-top:10px">体験版は製品版と同じ機能で 10 日間。録った MP4 は、期限が来ても残ります。製品版は ¥2,980 の買い切りです。</p>
+      <p class="mnote only-m">スマホで見ている方へ：ポチ録は Windows の PC で使います。上のボタンで、PC で開くリンクを自分に送れます。</p>
+    </div>
+  </div>
+
+  <section id="steps">
+    <h2>3 ステップで始まります</h2>
+    <figure class="vid"><video controls muted loop playsinline autoplay preload="metadata" width="480" height="480" poster="https://eri1191122.github.io/pochiroku-lp/img/real_4site_poster.jpg"><source src="https://eri1191122.github.io/pochiroku-lp/img/pochiroku_real_4site.mp4" type="video/mp4"><img src="https://eri1191122.github.io/pochiroku-lp/img/real_4site_poster.jpg" width="480" height="480" alt="ポチ録の実際の画面（動画を読み込めないときの静止画）"></video><figcaption>本物の画面です（配信者名は見本）。音は効果音だけです。</figcaption></figure>
+    <ol class="steps">
+      <li>
+        <h3><i>1</i>配信者のページの URL を貼って、追加を押す</h3>
+        <p class="muted">YouTube のチャンネルの URL（<code>https://www.youtube.com/@ハンドル</code> の形）を入力欄に貼り、「＋ 追加」を押します。</p>
+        <figure class="shot"><div class="sc"><picture><source media="(max-width:640px)" srcset="https://eri1191122.github.io/pochiroku-lp/img/youtube_m_step1.png" width="849" height="75"><img src="https://eri1191122.github.io/pochiroku-lp/img/youtube_pc_step1.png" width="1652" height="872" style="--mw:849" alt="ポチ録の入力欄に YouTube Live の URL を貼り、追加ボタンを押す直前の画面" loading="lazy"></picture></div><p class="hint">横にスクロールできます</p><figcaption>※配信者名は見本です。</figcaption></figure>
+        <figure class="shot pc-only"><img src="https://eri1191122.github.io/pochiroku-lp/img/youtube_pc_step2.png" width="1652" height="872" alt="「追加しました。配信が始まったら自動で録画します」と表示され、一覧に監視中の行が出た画面" loading="lazy"><figcaption>追加すると「監視中」になります。※配信者名は見本です。</figcaption></figure>
+      </li>
+      <li>
+        <h3><i>2</i>あとは待つだけ。配信を見つけると、自動で録画が始まる</h3>
+        <p class="muted">PC とポチ録を動かしておけば、一覧の行が赤い「録画中」に変わります。あなたは何もしなくて大丈夫です。</p>
+        <figure class="shot"><div class="sc"><picture><source media="(max-width:640px)" srcset="https://eri1191122.github.io/pochiroku-lp/img/tiktok_m_rec.png" width="734" height="147"><img src="https://eri1191122.github.io/pochiroku-lp/img/tiktok_pc_rec.png" width="1039" height="435" style="--mw:734" alt="一覧の行が赤い「録画中」になり、経過と容量が増えている画面" loading="lazy"></picture></div><p class="hint">横にスクロールできます</p><figcaption>※配信者名と、時間・容量の数字は見本です。画像は TikTok LIVE の例です。</figcaption></figure>
+      </li>
+      <li>
+        <h3><i>3</i>配信が終わると、MP4 になって残る</h3>
+        <p class="muted">配信が終わると、録画を MP4 に仕上げます。「録画フォルダを開く」から、日付・時刻・配信者名のファイル名の MP4 を再生できます。</p>
+        <figure class="shot"><div class="sc"><picture><source media="(max-width:640px)" srcset="https://eri1191122.github.io/pochiroku-lp/img/tiktok_m_done.png" width="877" height="147"><img src="https://eri1191122.github.io/pochiroku-lp/img/tiktok_pc_done.png" width="1039" height="435" style="--mw:877" alt="状態が「完了」になり、「再生できます」と表示された画面" loading="lazy"></picture></div><p class="hint">横にスクロールできます</p><figcaption>※配信者名と、時間・容量の数字は見本です。画像は TikTok LIVE の例です。</figcaption></figure>
+      </li>
+    </ol>
+  </section>
+
+  <section id="check">
+    <h2>確認したこと</h2>
+    <p class="verified">2026-11-23 に、TikTok LIVE・ツイキャス・Twitch・YouTube Live の 4 サイトを同時に録画し、MP4 で再生できることを確認しました（v2.0.2）。</p>
+    <div class="facts"><div><b>3 分 38 秒</b><span>YouTube Live の録画の長さ</span></div><div><b>1280×720</b><span>30fps の映像</span></div><div><b>32 MB</b><span>MP4 のファイルサイズ</span></div></div>
+    <p class="sub muted">上の数字は、2026 年 11 月 23 日 20:33〜20:38 の確認での YouTube Live の 1 本です。確認は開発者の PC で、v2.0.2 の録画エンジンを使って行いました。画質や容量は、配信や設定によって変わります。ほかの PC・ほかの配信でも同じ結果になるという保証ではありません。</p>
+    <p class="sub muted">長時間の例：2026 年 10 月 17 日の 5 本同時録画（5 時間 55 分、TikTok・ツイキャス・Twitch・YouTube）は、すべて MP4 で保存できました。そのときの YouTube Live の容量は、1 時間あたり約 0.26 GB です（開発者の PC での実測からの概算）。</p>
+    <figure class="shot"><div class="sc"><picture><source media="(max-width:640px)" srcset="https://eri1191122.github.io/pochiroku-lp/img/tiktok_m_four.png" width="734" height="300"><img src="https://eri1191122.github.io/pochiroku-lp/img/tiktok_pc_four.png" width="1039" height="667" style="--mw:734" alt="TikTok・ツイキャス・Twitch・YouTube の 4 つの配信を同時に録画している画面" loading="lazy"></picture></div><p class="hint">横にスクロールできます</p><figcaption>4 サイトを同時に録画しているときの画面。※配信者名と、時間・容量の数字は見本です。</figcaption></figure>
+  </section>
+
+  <section id="rules">
+    <h2>YouTube Live での決まり</h2>
+    <ul class="rules">
+      <li><b>登録は 10 人まで、同時に録れるのは 2 本まで。</b>YouTube Live のチャンネルを登録できるのは 10 人まで、YouTube Live の同時録画は 2 本までです（4 サイト合計では登録 30 人まで）。</li>
+      <li><b>確認の間隔は 4 分（240 秒）以上。</b>配信中かどうかを、通常は 4 分以上の間隔で確かめます。登録人数が増えると延びます（例：5 人登録すると、基本の間隔は 350 秒）。</li>
+      <li><b>登録するのは、チャンネルの URL。</b>チャンネルの URL が基本です。動画やライブの URL を貼ったときは、チャンネルを探して登録します。終了済みの動画をダウンロードする用途ではありません。</li>
+      <li><b>画質は選べます。</b>「標準 HD」「最高画質」「省容量（SD）」「音声のみ」から選べます（初期設定は標準 HD）。ただし YouTube のライブは音声専用の形式がないため、「音声のみ」でも、最も小さい映像つきの形式になる場合があります。</li>
+      <li><b>録画は、配信を見つけた時点から。</b>確認の間隔が長めなので、見つける前の部分や、登録する前の部分にさかのぼって保存することはできません。</li>
+      <li><b>PC とポチ録を動かしておく必要があります。</b>PC の電源が切れているとき、スリープ中、ポチ録を終了しているあいだの配信は録れません。</li>
+      <li><b>アカウントは使いません。</b>ログイン情報も使わないため、メンバー限定などの配信は録画できません。</li>
+      <li><b>体験版は 10 日間・全機能、製品版は ¥2,980 の買い切り。</b>月額はありません。</li>
+    </ul>
+  </section>
+
+  <section id="compare">
+    <h2>ほかのやり方との違い</h2>
+    <p class="muted">YouTube Live の配信を残す方法は、ほかにもあります。それぞれ向いている場面が違います。</p>
+    <div class="tbl"><table>
+      <thead><tr><th>やり方</th><th>向いている場面</th><th>気をつける点</th></tr></thead>
+      <tbody>
+        <tr><td>画面録画ソフト</td><td>見ている配信を、その場で残したいとき</td><td>配信のあいだ、自分で操作して、画面を出しておく必要があります</td></tr>
+        <tr><td>コマンドで動かす道具</td><td>設定や操作に慣れていて、細かく調整したいとき</td><td>準備と操作に、ある程度の知識が要ります</td></tr>
+        <tr><td>ポチ録</td><td>見られない時間の配信を、まかせて残したいとき</td><td>URL を貼って待つだけ。PC とポチ録を動かしておく必要があります</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="faq">
+    <h2>よくある質問</h2>
+    <details><summary>スマホだけで使えますか</summary><p class="muted">使えません。ポチ録は Windows 10 / 11（64 ビット）の PC で動くアプリです。スマホからは、PC で開くリンクを自分に送れます。製品版キーはスマホからでも買えます。</p></details>
+    <details><summary>PC を閉じたり、スリープにしたりしても録れますか</summary><p class="muted">録れません。PC とポチ録が動いている間だけ、監視と録画ができます。最小化したままなら使えます。自動スリープを防ぐ設定はありますが、手動のスリープやノート PC のふたを閉じた場合までは防げません。</p></details>
+    <details><summary>どんな URL を登録しますか</summary><p class="muted">チャンネルの URL（https://www.youtube.com/@ハンドル の形）が基本です。動画やライブの URL を貼ったときは、チャンネルを探して登録します。終了済みの動画をダウンロードする用途ではありません。</p></details>
+    <details><summary>確認の間隔はどのくらいですか</summary><p class="muted">通常は 4 分（240 秒）以上です。登録人数が増えると延びます（例：5 人登録すると、基本の間隔は 350 秒）。確認には間隔があるため、配信を見つける前の部分にさかのぼって保存することはできません。</p></details>
+    <details><summary>メンバー限定の配信は録れますか</summary><p class="muted">録れません。YouTube では、あなたのアカウントもログイン情報も使わないため、メンバー限定などの配信は非対応です。</p></details>
+    <details><summary>何人まで登録できますか。同時に何本録れますか</summary><p class="muted">YouTube Live は 10 人まで登録でき、YouTube Live の同時録画は 2 本までです。4 サイト合計では、登録は 30 人まで、同時録画は初期設定 5 本（設定で 1〜10 本）です。</p></details>
+    <details><summary>長時間のライブも録れますか</summary><p class="muted">開発者の実測では、6 時間 2 分のライブを 1.53 GB の MP4 で保存できました（2026 年 10 月 17 日）。YouTube の配信 URL は、約 6 時間で切れたとみられる実測があり、切れたときは 1 回すぐに確認し直して、録画の再開を試みます。すべての配信が 6 時間ちょうどで切れるという意味ではありません。</p></details>
+    <details><summary>画質は選べますか</summary><p class="muted">選べます。「標準 HD」「最高画質」「省容量（SD）」「音声のみ」から選びます（初期設定は標準 HD）。ただし YouTube のライブは音声専用の形式がないため、「音声のみ」でも、最も小さい映像つきの形式になる場合があります。</p></details>
+    <details><summary>体験版と製品版の違いは何ですか</summary><p class="muted">機能は同じです。体験版は初回起動から 10 日間、無料で全機能が使えます。製品版は ¥2,980 の買い切りで、月額はなく、期限もありません。体験版の期限が来ても、録った MP4 は残ります。</p></details>
+  </section>
+
+  <section class="last" id="start">
+    <h2>今夜の配信から、残せます。</h2>
+    <p class="muted">体験版は 10 日間・全機能、登録不要。気に入ったら、製品版キー（¥2,980・買い切り）を入れると、期限なしで続きから使えます。</p>
+    <div class="price">
+      <div class="plan"><h3>体験版</h3><div class="yen">無料</div><p class="sub muted">初回起動から 10 日間。製品版と同じ機能。</p>
+        <a class="btn" href="https://eri1191122.github.io/pochiroku-lp/dl/" data-m="無料で 10 日試す（PC 用のリンクを送る）" data-goatcounter-click="click-dl-youtube-last" data-goatcounter-title="無料で 10 日試す（YouTube Live ページ・最後）">無料で 10 日試す</a></div>
+      <div class="plan"><h3>製品版</h3><div class="yen">¥2,980</div><p class="sub muted">買い切り。月額なし、期限なし。</p>
+        <a class="btn buy" href="https://eri1191122.github.io/pochiroku-lp/buy/" data-goatcounter-click="click-buy-youtube" data-goatcounter-title="製品版キーを買う（YouTube Live ページ）">製品版キーを買う</a></div>
+    </div>
+  </section>
+  <section id="others"><h2>ほかのサイトの録り方</h2><div class="others"><a href="https://eri1191122.github.io/pochiroku-lp/tiktok/" data-goatcounter-click="click-youtube-to-tiktok" data-goatcounter-title="TikTok LIVE の録り方（youtube ページから）">TikTok LIVE の録り方</a><a href="https://eri1191122.github.io/pochiroku-lp/twitcasting/" data-goatcounter-click="click-youtube-to-twitcasting" data-goatcounter-title="ツイキャスの録り方（youtube ページから）">ツイキャスの録り方</a><a href="https://eri1191122.github.io/pochiroku-lp/twitch/" data-goatcounter-click="click-youtube-to-twitch" data-goatcounter-title="Twitch の録り方（youtube ページから）">Twitch の録り方</a></div><p class="sub muted" style="text-align:center;margin-top:12px">ポチ録は 4 サイト（TikTok LIVE・ツイキャス・Twitch・YouTube Live）に対応しています。<a href="https://eri1191122.github.io/pochiroku-lp/">紹介ページへ</a></p></section>
+  </main>
+
+  <footer>
+    <p>各サイトの仕様が変わると、一時的に録れなくなることがあります。できるだけ早く更新で対応します。お問い合わせは BOOTH のショップ（pochiroku.booth.pm）のメッセージからどうぞ。</p>
+  </footer>
+</div>
+
+<div id="lb" aria-hidden="true"><img alt=""></div>
+<script>
+(function(){var lb=document.getElementById("lb"),im=lb.querySelector("img");
+document.querySelectorAll(".shot img").forEach(function(x){x.addEventListener("click",function(){im.src=x.currentSrc||x.src;lb.classList.add("on");});});
+lb.addEventListener("click",function(){lb.classList.remove("on");im.src="";});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){lb.classList.remove("on");}});})();
+</script>
+<script>
+(function(){
+  if (!window.POCHI_MOBILE) return;
+  var a = document.querySelectorAll("a[data-m]");
+  for (var i = 0; i < a.length; i++) {
+    a[i].textContent = a[i].getAttribute("data-m");
+    a[i].setAttribute("data-goatcounter-click", a[i].getAttribute("data-goatcounter-click") + "-m");
+  }
+})();
+</script>
+<script data-goatcounter="https://pochiroku.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

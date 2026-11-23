@@ -152,6 +152,11 @@ section{padding-block:48px;border-top:1px solid var(--line)}
   .shot .hint{display:block}
   .pc-only{display:none}
 }
+.vid{max-width:480px;margin:20px auto 8px}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:12px;background:#000}
+.vid figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6;text-align:center}
+.vid img{display:block;width:100%;height:auto}
+.others{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-top:8px}
 .verified{background:var(--surface);border:2px solid var(--ok);border-radius:12px;padding:14px 16px 14px 48px;position:relative;font-weight:700;max-width:none}
 .verified::before{content:"\2713";position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:16px;line-height:1}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
@@ -198,6 +203,7 @@ footer{padding-block:32px;font-size:13px;color:var(--muted);border-top:1px solid
   <div style="padding-block:20px 44px">
     <span class="eyebrow">TikTok LIVE ・ Windows</span>
     <h1>TikTok LIVE を、寝てる間に PC で自動録画する</h1>
+    <p class="lead"><b>アーカイブが残らない配信は、終わったらそれきり。だから、寝てる間に PC が録っておきます。</b></p>
     <p class="lead">こんな場面で、推しの LIVE を見逃したことはありませんか。</p>
     <ul class="scenes">
       <li>深夜に突然始まった LIVE。気づいたときには終わっていた</li>
@@ -215,6 +221,7 @@ footer{padding-block:32px;font-size:13px;color:var(--muted);border-top:1px solid
 
   <section id="steps">
     <h2>3 ステップで始まります</h2>
+    <figure class="vid"><video controls muted loop playsinline autoplay preload="metadata" width="480" height="480" poster="https://eri1191122.github.io/pochiroku-lp/img/pochiroku_real_poster.jpg"><source src="https://eri1191122.github.io/pochiroku-lp/img/pochiroku_real_x.mp4" type="video/mp4"><img src="https://eri1191122.github.io/pochiroku-lp/img/pochiroku_real_poster.jpg" width="480" height="480" alt="ポチ録の実際の画面（動画を読み込めないときの静止画）"></video><figcaption>本物の画面です（配信者名は見本）。音は効果音だけです。</figcaption></figure>
     <ol class="steps">
       <li>
         <h3><i>1</i>配信者のページの URL を貼って、追加を押す</h3>
@@ -296,8 +303,8 @@ footer{padding-block:32px;font-size:13px;color:var(--muted);border-top:1px solid
       <div class="plan"><h3>製品版</h3><div class="yen">¥2,980</div><p class="sub muted">買い切り。月額なし、期限なし。</p>
         <a class="btn buy" href="https://eri1191122.github.io/pochiroku-lp/buy/" data-goatcounter-click="click-buy-tiktok" data-goatcounter-title="製品版キーを買う（TikTok ページ）">製品版キーを買う</a></div>
     </div>
-    <p class="sub" style="margin-top:20px"><a href="https://eri1191122.github.io/pochiroku-lp/">ポチ録の紹介ページ（4 サイト対応）へ</a></p>
   </section>
+  <section id="others"><h2>ほかのサイトの録り方</h2><div class="others"><a href="https://eri1191122.github.io/pochiroku-lp/twitcasting/" data-goatcounter-click="click-tiktok-to-twitcasting" data-goatcounter-title="ツイキャスの録り方（tiktok ページから）">ツイキャスの録り方</a><a href="https://eri1191122.github.io/pochiroku-lp/twitch/" data-goatcounter-click="click-tiktok-to-twitch" data-goatcounter-title="Twitch の録り方（tiktok ページから）">Twitch の録り方</a><a href="https://eri1191122.github.io/pochiroku-lp/youtube/" data-goatcounter-click="click-tiktok-to-youtube" data-goatcounter-title="YouTube Live の録り方（tiktok ページから）">YouTube Live の録り方</a></div><p class="sub muted" style="text-align:center;margin-top:12px">ポチ録は 4 サイト（TikTok LIVE・ツイキャス・Twitch・YouTube Live）に対応しています。<a href="https://eri1191122.github.io/pochiroku-lp/">紹介ページへ</a></p></section>
   </main>
 
   <footer>
